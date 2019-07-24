@@ -46,7 +46,7 @@ document.getElementsByTagName( 'head' )[0].appendChild( link );
 </a></b><br/>Riga, July 2019</p>
 <br/>
 <hr/>
-<p>Christof Schöch<br/>(TCDH, Univ. of Trier, Germany)</p>
+<p>Christof Schöch<br/>(Trier Center for Digital Humanities, Trier, Germany)</p>
 <img height="50" data-src="img/basics/uni-trier.png"></img>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<img height="50" data-src="img/basics/tcdh.png"></img></p>
 
 
@@ -57,11 +57,11 @@ document.getElementsByTagName( 'head' )[0].appendChild( link );
 1. [Distributional Semantics: Principles and Methods](#/3) 
 2. [What are Word Embeddings?](#/4) 
 2. [What is Topic Modeling? Examples](#/5) 
-2. [Interpreting Topic Models: An Example](#/6)
-3. [Topic Models: the Theory](#/7)
-3. [A Topic Modeling pipeline](#/8)
-4. [First steps doing Topic Modeling](#/9)
-5. [Advanced issues in Topic Modeling](#/10)
+3. [Topic Models: the Theory](#/6)
+3. [A Topic Modeling pipeline](#/7)
+4. [First steps doing Topic Modeling](#/8)
+5. [Advanced issues in Topic Modeling](#/9)
+5. [Wrapping up](#/10)
 
 
 
@@ -72,6 +72,7 @@ document.getElementsByTagName( 'head' )[0].appendChild( link );
 ## About this workshop 
 <br/>
 * Slides available online: https://christofs.github.io/riga/#/
+* Download: <br/>https://www.dropbox.com/s/orq3nx0zmui96l9/tm-downloads.zip?dl=0
 
 
 --
@@ -87,15 +88,14 @@ document.getElementsByTagName( 'head' )[0].appendChild( link );
 --
 ## About you: raise your hand if...
 <br/>
-* ... you are a literary scholar
-* ... you are a historian
-* ... you are a sociologist
-* ... you are a (computational / corpus) linguist
-* ... you are a computer scientist
-* ... you are a digital humanist
-* ... you are a librarian
-* ... you consider yourself to be a local
-
+* ... you are a literary scholar <!-- .element: class="fragment" data-fragment-index="1" -->
+* ... you are a historian <!-- .element: class="fragment" data-fragment-index="2" -->
+* ... you are a sociologist <!-- .element: class="fragment" data-fragment-index="3" -->
+* ... you are a (computational / corpus) linguist <!-- .element: class="fragment" data-fragment-index="4" -->
+* ... you are a computer scientist <!-- .element: class="fragment" data-fragment-index="5" -->
+* ... you are a digital humanist <!-- .element: class="fragment" data-fragment-index="6" -->
+* ... you are a librarian <!-- .element: class="fragment" data-fragment-index="7" -->
+* ... you consider yourself to be a local <!-- .element: class="fragment" data-fragment-index="8" -->
 
 
 ---
@@ -104,50 +104,71 @@ document.getElementsByTagName( 'head' )[0].appendChild( link );
 --
 ## Basic intuition about distributional semantics
 <br/>
-* Her friend's ... was located on the second floor of the house. 
-* "room" ?
-* "apartment" ?
-* "balcony" ?
-* "cat" ?
+* Her friend's ...... was located on the second floor of the house. 
+<br/><br/>
+* "apartment" ! <!-- .element: class="fragment" data-fragment-index="1" -->
+* "room" ! <!-- .element: class="fragment" data-fragment-index="2" -->
+* "balcony" ? <!-- .element: class="fragment" data-fragment-index="3" -->
+* "cat" ?? <!-- .element: class="fragment" data-fragment-index="4" -->
+* "shark" ??? <!-- .element: class="fragment" data-fragment-index="5" -->
+
 
 --
 ## What does this example tell us?
 <br/>
-* We can rank the likelihood of these words in the given context
-* We use world knowledge, but also linguistic competency, for this
-* Computers can learn this too, based on cooccurrence patterns
-* That's how distributional semantics works
+* We are able to rank the likelihood of these words in the given context <!-- .element: class="fragment" data-fragment-index="1" -->
+* We use world knowledge, but also linguistic competency, for this <!-- .element: class="fragment" data-fragment-index="2" -->
+* Computers can learn this too, based on cooccurrence patterns <!-- .element: class="fragment" data-fragment-index="3" -->
+* That's how distributional semantics works! <!-- .element: class="fragment" data-fragment-index="4" -->
+
 
 --
 ## Basic idea
 <br/>
-* The meaning of words depends on their context <!-- .element: class="fragment" data-fragment-index="1" -->
+* The meaning of words depends on their context<br/> "You shall know a word by the company it keeps" (Firth, 1957) <!-- .element: class="fragment" data-fragment-index="1" -->
 * Words frequently appearing in similar contexts have similar meanings <!-- .element: class="fragment" data-fragment-index="2" -->
+* Words that can appear in very similar, specific contexts have similar grammatical functions <!-- .element: class="fragment" data-fragment-index="3" -->
 
+--
+## Two applications of this idea
+<br/>
+* Topic Modeling
+* Word Embeddings
 
 ---
 # What are Word Embeddings? 
 
 --
-## Two Models
+## Information Retrieval: Vector Space Model
 <br/>
-* French Wikipedia <!-- .element: class="fragment" data-fragment-index="1" -->
-    * 1.8 million articles, 750 million words
-    * skip-gram model, 300 dimensions 
-* French 20th-century novel <!-- .element: class="fragment" data-fragment-index="2" -->
-    * 1200 novels, 75 million words
-    * skip-gram model, 300 dimensions
-    * tokens: "lemma_pos"
+* Each document has a certain place in a vector space <!-- .element: class="fragment" data-fragment-index="1" -->
+* That place is determined by the keywords that appear in the document <!-- .element: class="fragment" data-fragment-index="2" -->
+* Each word is a dimension in the vector space <!-- .element: class="fragment" data-fragment-index="3" -->
+* Documents with shared vocabulary end up in the same area of the vector space <!-- .element: class="fragment" data-fragment-index="4" -->
 
 --
-## Similarity
-<img src="img/figure-1_similarity2.png" height="600px">
+## Information Retrieval: Vector Space Model
+<br/>
+* ###TODO###: illustration!
+
+--
+## Word Embeddings in vector space
+<img src="img/figure-1_similarity2.png" height="550px">
+<br/>
+(artificial data)
+
+
+--
+## Example: French Wikipedia Model
+<br/>
+* 1.8 million articles, 750 million words
+* skip-gram model, 300 dimensions 
+* vecor semantics: geometric relations = semantic relations
 
 
 --
 ## Similar Words Query
 <br/>
-(Wikipedia)
 ```
 Query:   ['poésie_nom', 10]
 Result:  poétique_adj     0.841
@@ -161,11 +182,12 @@ Result:  poétique_adj     0.841
          littéraire_adj   0.655
          sonnet_nom       0.651
 ```
+<br/>
+(authentic data, Wikipedia model)
 
 --
 ## Similarity Query
 <br/>
-(Wikipedia)
 ```
 Query: ['prose_nom', 'littérature_nom']
 Result: 0.511518681366
@@ -173,6 +195,8 @@ Result: 0.511518681366
 Query: ['poésie_nom', 'littérature_nom']
 Result: 0.714615326722
 ```
+<br/>
+(authentic data, Wikipedia model)
 
 --
 ## Evaluation
@@ -182,88 +206,26 @@ Result: 0.714615326722
     * vert, bleu, jaune, rouge, orange
     * argent, billet, monnaie, portemonnaie, payement
 * Generate lists with an error <!-- .element: class="fragment" data-fragment-index="3" -->
-    * vert, bleu, argent, jaune, rouge  
+    * vert, bleu, monnaie, jaune, rouge  
+* Wikipedia model: 90% accuracy in finding the error <!-- .element: class="fragment" data-fragment-index="4" -->
+
 
 --
-## Results: accuracy
+## Axes of meaning
+<img src="img/axes-of-meaning2.png" height="550px">
 <br/>
-* Wikipedia model: 90% accuracy
-* French novel model: 79.5% accuracy
-
-
---
-## Word Embeddings<br/>for Topic Modeling
-
---
-## Topic Modeling
-<a href="img/wordle_tp002.png"><img src="img/wordle_tp002.png" height="600px"></a>
-
---
-## Coherence Assessment: Mallet Diagnostics
-<img src="img/mallet.png" height="600px">
---
-## Coherence Assessment: Palmetto
-<img src="img/palmetto.png" height="600px">
-
---
-## Challenges
-<br/>
-* Mallet diagnostics are only intrinsic to the data
-* Palmetto requires you to build an adequate index
-
---
-## WEM-based coherence measure
-<a href="img/roman20_topic-coherences.svg"><img src="img/roman20_topic-coherences.svg" height="600px"></a>
-
-
---
-## Evaluation
-<br/>
-Correlation between WEM-based<br/> coherence and Mallet diagnostics<br/>
-(Pearson's R, p-value)
-<br/>
-<br/>
-* mtuniformdist, 0.536, 9.22e-09
-* mtcoherence, -0.004, 0.970
-* mtexclusivity, 0.117, 0.246
-<br/>
-<br/>http://mallet.cs.umass.edu/diagnostics.php
-
---
-## (c) Word Embeddings<br/>for Sentiment Analysis
-
---
-## Challenges 
-<br/>
-* An important branch of Sentiment Analysis<br/>requires an Emotion Lexicon <!-- .element: class="fragment" data-fragment-index="1" --> 
-* These lexica usually have poor coverage<br/>(e.g. NRC: 14k words) <!-- .element: class="fragment" data-fragment-index="2" -->
-* Many of them also only provide ternary information<br/>(positive, negative, neutral) <!-- .element: class="fragment" data-fragment-index="3" -->
-* Combining WEM and Emotion Lexica could<br/> improve both resources <!-- .element: class="fragment" data-fragment-index="4" -->
-
-
---
-## Axes of meaning (Ryan Heuser)
-<img src="img/fig-abstract-1.jpg" height="500px">
-<br/>
-(concrete vs. abstract)
-
+(artifcial data)
 
 --
 ## Axes of meaning (Ryan Heuser)
 <img src="img/fig-abstract-2.jpg" height="500px">
 <br/>
-(correlation with contemporary annotated data)
-
-
---
-## Axes of meaning
-<img src="img/axes-of-meaning2.png" height="600px">
+(concrete vs. abstract)
 
 
 --
 ## Axis query
 <br/>
-(French novels)
 ```
 Axis: [["bonheur", "joie"],          # positive
        ["malheur", "tristesse"]]     # negative
@@ -274,6 +236,8 @@ Result:  0.0875
 Query:   monstre
 Result   -0.1407
 ```
+<br/>
+(authentic data)
 
 --
 ## Relation of words in semantic dimensions
@@ -281,68 +245,19 @@ Result   -0.1407
 
 
 --
-## Extend and adapt sentiment lexica
-<a href="img/figure-5_sentiments.png"><img src="img/figure-5_sentiments.png" height="600px"></a>
-
-
---
-## Workflow
-<br/>
-* Retrieve 2000 most frequent nouns from WEM <!-- .element: class="fragment" data-fragment-index="1" -->
-* Query SentiWordNet for the sentiment scores <!-- .element: class="fragment" data-fragment-index="2" -->
-* 158 out of 2000 (or 7.9%) don't have a score <!-- .element: class="fragment" data-fragment-index="3" -->
-* Retrieve the word vectors for each of the nouns <!-- .element: class="fragment" data-fragment-index="4" -->
-* Use the 1842 nouns which have both a vector<br/> and a SWN score as training data <!-- .element: class="fragment" data-fragment-index="5" -->
-* Use a regression task to predict SWN scores<br/> for the 158 words <!-- .element: class="fragment" data-fragment-index="6" --> 
-
---
-## Newly-predicted (positive)
-<br/>
-* mérite	0.224
-* ange	0.191
-* aise	0.168
-* sérieux	0.168
-* merci	0.163
-* savant	0.162
-* parler	0.157
-* seul	0.152
-* remplacé 0.150
-* envie	0.141
-* rire	0.137
-
---
-## Newly-predicted (negative)
-<br/>
-* fracas	0.294
-* injure	0.292
-* coupable	0.221
-* vertige	0.211
-* cesse	0.203
-* tel	0.180
-* blessé	0.157
-* suite	0.156
-* merci	0.153
-* mélange	0.149
-* envie	0.146
-
-
---
-## Evaluation
-<br/>
-* Correlation between existing scores and <br/>the prediction for these same scores: 0.59
+## Time for questions!
 
 --
 ## References
 
 <small>
 
-* Blei, David M. „Probabilistic Topic Models“. Communications of the ACM 55, Nr. 4 (2012): 77. doi:10.1145/2133806.2133826.
 * Goldberg, Yoav, und Omer Levy. „word2vec Explained: deriving Mikolov et al.’s negative-sampling word-embedding method“. arXiv.org, 2014. http://arxiv.org/abs/1402.3722.
-Heuser, Ryan. „Word Vectors in the Eighteenth Century“. In Digital Humanities 2017: Conference Abstracts, 256–60. Montréal: McGill University & Université de Montréal, 2017.
+* Heuser, Ryan. „Word Vectors in the Eighteenth Century“. In Digital Humanities 2017: Conference Abstracts, 256–60. Montréal: McGill University & Université de Montréal, 2017.
 * Mikolov, Tomas, Kai Chen, Greg Corrado, und Jeffrey Dean. „Efficient Estimation of Word Representations in Vector Space“. arXiv.org, 2013. http://arxiv.org/abs/1301.3781.
 * Pennington, Jeffrey, Richard Socher, und Christopher D. Manning. „Glove: Global vectors for word representation“, 2014. doi:10.1.1.671.1743.
 * Turney, Peter T., und Patrick Pantel. „From Frequency to Meaning: Vector Space Models of Semantics“. Journal of Artificial Intelligence Research 37 (2010): 141–88. https://arxiv.org/abs/1003.1141.
-* Widdows, Dominic. Geometry and meaning. CSLI lecture notes, no. 172. Stanford CA: CSLI Publications, 2004.
+* Widdows, Dominic. *Geometry and meaning*. CSLI lecture notes, no. 172. Stanford CA: CSLI Publications, 2004.
 
 </small>
 
@@ -368,11 +283,12 @@ Heuser, Ryan. „Word Vectors in the Eighteenth Century“. In Digital Humanitie
 # What is Topic Modeling?
 
 --
-# (a) Getting started
+## (a) Some fundamentals
 
 
 --
 ## Topic Modeling: basic idea
+<br/>
 * Works on the basis of (large) collections of documents <!-- .element: class="fragment" data-fragment-index="1" -->
 * Each document is understood as a mixture of topics <!-- .element: class="fragment" data-fragment-index="2" -->
 * The purpose is to discover thematic trends and patterns <!-- .element: class="fragment" data-fragment-index="3" -->
@@ -381,6 +297,7 @@ Heuser, Ryan. „Word Vectors in the Eighteenth Century“. In Digital Humanitie
 
 --
 ## Usage scenarios
+<br/>
 * Information Retrieval: Search not for individual terms, but themes / semantic fields <!-- .element: class="fragment" data-fragment-index="1" -->
 * Recommender Systems: Recommend similar journal articles etc. to users <!-- .element: class="fragment" data-fragment-index="2" -->
 * Exploration of text collections: what is an email or newspaper corpus about? <!-- .element: class="fragment" data-fragment-index="3" -->
@@ -394,6 +311,7 @@ Heuser, Ryan. „Word Vectors in the Eighteenth Century“. In Digital Humanitie
 
 --
 ## Existing Studies
+<br/>
 * Cameron Blevins: "Topic Modeling Martha Ballard's Diary" (2010): diary <!-- .element: class="fragment" data-fragment-index="1" -->
 * Ted Underwood und Andrew Goldstone (2012): "What can topic models of PMLA teach us...": history of a discipline <!-- .element: class="fragment" data-fragment-index="2" -->
 * Lisa Rhody, "Topic Modeling and Figurative Language" (2012): ekphrasis in poetry	 <!-- .element: class="fragment" data-fragment-index="3" -->
@@ -402,69 +320,21 @@ Heuser, Ryan. „Word Vectors in the Eighteenth Century“. In Digital Humanitie
 * Christof Schöch, "Topic Modeling Genre" (2017): drama, subgenres <!-- .element: class="fragment" data-fragment-index="6" -->
 
 
-
 --
-# (b) How does a topic model look like?
-
---
-## Words, Topics, Documents
-<p><img height="500" data-src="img/tm_blei.png"></img></p>
-<p>(David Blei, "Probabilistic Topic Models", 2012)</p>
-
---
-## On a practical level
-* A topic is a group of words with some (semantic) relation (e.g., common theme) <!-- .element: class="fragment" data-fragment-index="1" -->
-* Each topic is made up of words of varying importance and relevance to the topic <!-- .element: class="fragment" data-fragment-index="2" -->
-* Each document is made up of several topics in various proportions <!-- .element: class="fragment" data-fragment-index="3" -->
-
---
-## On a technical level
-* A topic model is an abstract representation of all topics and documents in a collection <!-- .element: class="fragment" data-fragment-index="1" -->
-* A topic is a probability distribution over words <!-- .element: class="fragment" data-fragment-index="3" -->
-* A document is a probability distribution over topics <!-- .element: class="fragment" data-fragment-index="4" -->
-* The Dirichlet distribution (in LDA) describes the topic mixture distribution of the model <!-- .element: class="fragment" data-fragment-index="5" -->
-
---
-## Words in topic distribution
-<p><img height="400" data-src="img/word-scores-in-topics.png"></img></p>
-<p>(Each word has a score in each topic; here ordered by topic/rank)
-
---
-## Topics in document distribution
-<p><img height="400" data-src="img/docs-and-topics-in-rank.png"></img></p>
-<p>(Each topic has a score in each document; ordered by document)
-
---
-## Dirichlet distributions
-<p><a href="img/dirichlet_plot.png"><img height="500" data-src="img/dirichlet_plot.png"></img></a></p>
-<p>(Describe the topic mixture distributions of the model)<br/>(Here several possible distributions with three topics)</p>
-
-<!--
---
-## Dirichlet distributions for both
-<p><img height="400" data-src="img/two-dirichlet-distributions.png"></img></p>
-<p>(Describe the topic and word mixture distributions of the model)<br/>(Here two possible distributions with three words/topics)</p>
--->
-
-
----
-# Interpreting Topic Models: <br/>An example from French crime fiction
+## (b) A topic model for French crime fiction
 
 --
 ## Text collection: 840 French Novels
 <img height="500" data-src="img/textsammlung.png"></img>
 
-
-
 --
 ## Crime fiction (prototypical)
+<br/>
 * Long, narrative, fictional prose (=novel) <!-- .element: class="fragment" data-fragment-index="1" -->
 * Character inventory: investigators, criminals, suspects, witnesses, victims <!-- .element: class="fragment" data-fragment-index="2" -->
 * Plot: violent crime, rational elucidation <!-- .element: class="fragment" data-fragment-index="3" -->
 * Setting: urban space <!-- .element: class="fragment" data-fragment-index="4" -->
 * => Hypotheses regarding possible topics <!-- .element: class="fragment" data-fragment-index="5" -->
-
-
 
 --
 ## Topic and subgenre
@@ -507,10 +377,9 @@ Heuser, Ryan. „Word Vectors in the Eighteenth Century“. In Digital Humanitie
 <p><b>Topic 33: black, hair, eyes, wear, eye, face</b></p>
 <p>Statistically significant: crime fiction all but (2,3);<br/> non-crime fiction (1,3), (2,5)</p>
 
-
-
 --
 ## Overall results
+<br/>
 * A large part of the topics is statistically distinctive: crime fiction (31/80) non-crime fiction (21/80) <!-- .element: class="fragment" data-fragment-index="1" -->
 * Topics are not just themes, but also narrative motives, descriptive elements, character sets <!-- .element: class="fragment" data-fragment-index="2" -->
 * Textual progression: only a few topics have significant trends <!-- .element: class="fragment" data-fragment-index="3" -->
@@ -518,7 +387,7 @@ Heuser, Ryan. „Word Vectors in the Eighteenth Century“. In Digital Humanitie
 
 
 --
-## (b) Some more visualizations
+## (c) Bonus slides: visualizations
 
 --
 ## Topics and subgenres: topic 3
@@ -577,11 +446,48 @@ Heuser, Ryan. „Word Vectors in the Eighteenth Century“. In Digital Humanitie
 
 
 
+
+
 ---
 # Topic Modeling: Theory
 
 --
+## (a) How does a topic model look like?
+
+--
+## On a practical level
+<br/>
+* A topic is a group of words with some (semantic) relation (e.g., common theme) <!-- .element: class="fragment" data-fragment-index="1" -->
+* Each topic is made up of words of varying importance and relevance to the topic <!-- .element: class="fragment" data-fragment-index="2" -->
+* Each document is made up of several topics in various proportions <!-- .element: class="fragment" data-fragment-index="3" -->
+
+--
+## On a technical level
+<br/>
+* A topic model is an abstract representation of all topics and documents in a collection <!-- .element: class="fragment" data-fragment-index="1" -->
+* A topic is a probability distribution over words <!-- .element: class="fragment" data-fragment-index="3" -->
+* A document is a probability distribution over topics <!-- .element: class="fragment" data-fragment-index="4" -->
+* The Dirichlet distribution (in LDA) describes the topic mixture distribution of the model <!-- .element: class="fragment" data-fragment-index="5" -->
+
+--
+## Words in topic distribution
+<p><img height="400" data-src="img/word-scores-in-topics.png"></img></p>
+<p>(Each word has a score in each topic; here ordered by topic/rank)
+
+--
+## Topics in document distribution
+<p><img height="400" data-src="img/docs-and-topics-in-rank.png"></img></p>
+<p>(Each topic has a score in each document; ordered by document)
+
+
+
+--
+## (b) How is a Topic Model created?
+
+
+--
 ## Some relevant ideas
+<br/>
 * The most widespread implementation uses 'Latent Dirichlet Allocation'
 * Follows the "bag-of-words"-model: word order is irrelevant <!-- .element: class="fragment" data-fragment-index="1" -->
 * No semantic knowledge / dictionary / WordNet etc. is used; language-independent <!-- .element: class="fragment" data-fragment-index="2" -->
@@ -593,12 +499,8 @@ Heuser, Ryan. „Word Vectors in the Eighteenth Century“. In Digital Humanitie
 
 --
 ## Generative, inverted, iterative
-<br/>
->"A topic model is a generative model for documents: it specifies a simple probabilistic procedure by which documents can be generated. To make a new document, one chooses a distribution over topics. Then, for each word in that document, one chooses a topic at random according to this distribution, and draws a word from that topic. Standard statistical techniques can be used to invert this process, inferring the set of topics that were responsible for generating a collection of documents."
 
-<br/>
-<p>(Steyvers and Griffiths, "Probabilistic Topic Modeling", 2006)</p>
-
+>"A topic model is a generative model for documents: it specifies a simple probabilistic procedure by which documents can be generated. To make a new document, one chooses a distribution over topics. Then, for each word in that document, one chooses a topic at random according to this distribution, and draws a word from that topic. Standard statistical techniques can be used to invert this process, inferring the set of topics that were responsible for generating a collection of documents." <br/>(Steyvers and Griffiths 2006)
 
 
 --
@@ -610,7 +512,6 @@ Heuser, Ryan. „Word Vectors in the Eighteenth Century“. In Digital Humanitie
 ## Inferred, latent model
 <p><img height="500" data-src="img/tm_blei.png"></img></p>
 <p>(David Blei, "Probabilistic Topic Models", 2012)</p>
-
 
 
 --
@@ -639,9 +540,15 @@ Heuser, Ryan. „Word Vectors in the Eighteenth Century“. In Digital Humanitie
 
 </small>
 
+--
+## Dirichlet distributions
+<p><a href="img/dirichlet_plot.png"><img height="500" data-src="img/dirichlet_plot.png"></img></a></p>
+<p>(Describe the topic mixture distributions of the model)<br/>(Here several possible distributions with three topics)</p>
+
 
 --
 ## The starting point of LDA
+<br/>
 * We have the documents with their words (e.g. as a word/document frequency matrix)  <!-- .element: class="fragment" data-fragment-index="1" -->
 * We are looking for the word distributions per topic, the topic distributions per document, and the topic assignment of each word  <!-- .element: class="fragment" data-fragment-index="2" -->
 * Both distributions are dependent on each other (if a topic changes, the topic distributions change)  <!-- .element: class="fragment" data-fragment-index="3" -->
@@ -650,6 +557,7 @@ Heuser, Ryan. „Word Vectors in the Eighteenth Century“. In Digital Humanitie
 
 --
 ## The generative model behind LDA
+<br/>
 * For each topic, there is a distribution over words <!-- .element: class="fragment" data-fragment-index="1" -->
 * For each document, there is a distribution over topics <!-- .element: class="fragment" data-fragment-index="2" -->
 * For each word in each document: <!-- .element: class="fragment" data-fragment-index="3" -->
@@ -659,6 +567,7 @@ Heuser, Ryan. „Word Vectors in the Eighteenth Century“. In Digital Humanitie
 
 --
 ## Random initialization
+<br/>
 * For each document, we generate a random distribution over topics <!-- .element: class="fragment" data-fragment-index="1" -->
 * For each topic, we generate a random distribution over words <!-- .element: class="fragment" data-fragment-index="2" -->
 * For each word in each document:  <!-- .element: class="fragment" data-fragment-index="3" -->
@@ -668,6 +577,7 @@ Heuser, Ryan. „Word Vectors in the Eighteenth Century“. In Digital Humanitie
 
 --
 ## Inference: iterative approximation
+<br/>
 * Using the observed data and our (random/erroneous) model, we can improve the model <!-- .element: class="fragment" data-fragment-index="1" -->
 * One among several methods: Gibbs sampling <!-- .element: class="fragment" data-fragment-index="2" -->
 	* For one word in one document, remove the existing topic assignment <!-- .element: class="fragment" data-fragment-index="3" -->
@@ -675,10 +585,28 @@ Heuser, Ryan. „Word Vectors in the Eighteenth Century“. In Digital Humanitie
     * Update the overall model according to this assignment;  <!-- .element: class="fragment" data-fragment-index="5" -->
 * Repeat until your time runs out or your evaluation task says it's ok to stop <!-- .element: class="fragment" data-fragment-index="6" -->
 
-
 --
 ## How it works exactly, clearly explained
 <p><img height="600" data-src="img/sharris_more-explicit-in-step-two.jpg"></img></p>  <!-- .element: class="fragment" data-fragment-index="1" -->
+
+
+
+--
+## Time for questions
+
+--
+## Further Reading: Theory
+<small>
+
+**Introductory articles**
+* Blei, David M. (2012). "Probabilistic topic models". In: _Communications of the ACM_, 55(4): 77–84. <http://www.cs.princeton.edu/~blei/papers/Blei2012.pdf>
+* Steyvers, M. and Griffiths, T. (2006). "Probabilistic Topic Models". In: Landauer, T. et al. (eds), _Latent Semantic Analysis: A Road to Meaning_. Laurence Erlbaum.
+
+**Video lectures**
+* Jordan Boyd-Graber, "Topic Models", YouTube.com, 2015. <https://www.youtube.com/watch?v=yK7nN3FcgUs>
+* David Blei, "Topic Models", Videolectures.net, 2012, <http://videolectures.net/mlss09uk_blei_tm/>
+
+</small>
 
 
 
@@ -730,9 +658,8 @@ Heuser, Ryan. „Word Vectors in the Eighteenth Century“. In Digital Humanitie
 
 
 --
-## (2) Topic Modeling Workflow
-<p><a href="img/topic-modeling-workflow_EN.png"><img height="500" data-src="img/topic-modeling-workflow_EN.png"></img></a></p>
-<p>(Mallet and Python; see <a href="http://github.com/cligs/tmw">github.com/cligs/tmw</a>)</p>
+## A Topic Modeling pipeline
+<p><a href="img/tm-workflow_eng.png"><img height="500" data-src="img/tm-workflow_eng.png"></img></a></p>
 
 
 --
@@ -740,17 +667,28 @@ Heuser, Ryan. „Word Vectors in the Eighteenth Century“. In Digital Humanitie
 <br/>
 * Preprocessing: text segmentation, lemmatization, feature selection <!-- .element: class="fragment" data-fragment-index="1" -->
 * Modeling: number of topics, number of iterations, etc.  <!-- .element: class="fragment" data-fragment-index="2" -->
-* Evaluation: model quality measure  <!-- .element: class="fragment" data-fragment-index="2" -->
-* Postprocessing: level of metadata / text linkage  <!-- .element: class="fragment" data-fragment-index="2" -->
-* Visualization: many options  <!-- .element: class="fragment" data-fragment-index="3" -->
-
+* Evaluation: model quality measure  <!-- .element: class="fragment" data-fragment-index="3" -->
+* Postprocessing: level of metadata / text linkage  <!-- .element: class="fragment" data-fragment-index="4" -->
+* Visualization: many options  <!-- .element: class="fragment" data-fragment-index="5" -->
 
 --
-## gensim: the heart of topic modeling
+## The pipeline in Python
 <br/>
-* Preprocessing is done elsewhere (eg., with tmw)
-* Postprocessing and visualisation is done elsewhere (eg., with tmw)
-* gensim imports texts and builds the topic model (and does it really well)
+* Preprocessing: NLTK / TextBlob  <!-- .element: class="fragment" data-fragment-index="1" -->
+* Corpus ingest, modeling, evaluation: gensim  <!-- .element: class="fragment" data-fragment-index="2" -->
+* Postprocessing: pandas  <!-- .element: class="fragment" data-fragment-index="3" -->
+* Visualisation: pyLDAvis, seaborn, wordcloud, etc.  <!-- .element: class="fragment" data-fragment-index="4" -->
+
+--
+## Time for questions
+
+--
+## Tutorials
+<br/>
+* Weingart, Scott (2012). "Topic Modeling for Humanists: A Guided Tour". In: _The Scottbot Irregular_. <http://www.scottbot.net/HIAL/?p=19113>
+* Graham, Shawn, Scott Weingart and Ian Milligan (2012). "Getting Started with Topic Modeling and MALLET". _The Programming Historian_. <http://programminghistorian.org/lessons/topic-modeling-and-mallet>
+* Riddell, Allen. (2014). "TAToM: Text Analysis with Topic Modeling for Humanities Scholars". In: _DARIAH-DE Schulungsmaterialien_. <https://de.dariah.eu/tatom/>
+
 
 
 
@@ -758,7 +696,7 @@ Heuser, Ryan. „Word Vectors in the Eighteenth Century“. In Digital Humanitie
 
 
 ---
-## First steps doing Topic Modeling
+# First steps doing Topic Modeling
 
 
 --
@@ -790,9 +728,10 @@ Heuser, Ryan. „Word Vectors in the Eighteenth Century“. In Digital Humanitie
 * each module consists of several functions
 * a "main" function coordinates these functions
 * the "run_pipeline.py" script coordinates the modules
+* Note: each module reads and writes data; 
 
 --
-## A closer look at run_pipeline
+## A closer look at "run_pipeline1.py"
 <br/>
 * Imports
 * Files and Folders
@@ -800,103 +739,116 @@ Heuser, Ryan. „Word Vectors in the Eighteenth Century“. In Digital Humanitie
 * Functions
 * Coordinating function
 
-
 --
 ## Step by step: preprocessing
 <br/>
 * Open "preprocessing.py" with Thonny
 * Note the parameters
 * Note the file structure
-* Note the flow of the data
+* Note the flow of the data (input/output)
+* Run it from "run_pipeline1.py"
 
 
-
+--
+## Running the pipeline one by one
+<br/>
+* preprocessing
+* build_corpus
+* modeling
+* postprocessing
+* make_overview 
 
 
 --
 ## Practice
 
-
 --
 ## Exercise 1: run "run_pipeline1.py"
 <br/>
+* Use the small "hkpress-test" dataset
 * Decide on your own parameters
 * What error messages do you get, if any?
 * What kind of results do you get?
 
-
 --
 ## Exercise 2: Adapt the commands
+<br/>
+* Continue using the "hkpress-test" corpus
+* Decide on a new "identifier" for your model
 * At your choice, do *one* of the following 
-    * Deactivate or modify the stopword list (on import)
-    * Use the `1-prepd` files (on import)
-    * Use a different number of topics
-    * Perform fewer or more iterations
-    * Display more or less topic words
-    * Add the parameter `--optimize-interval 10` to your modeling command
-* Make sure the files are written to a new folder (e.g. "2-mallet_v2/")
+    * Modify the stopword list (in: preprocessing.py)
+    * Use a different number of topics (in: run_pipeline1.py)
 * Inspect the results and write down any changes you notice
 
-</section>
-<section>
+
+
+
+---
+#  More issues in Topic Modeling
 
 --
-# Discussion
+## Activity 1: More visualisations 
+<br/>
+* Wordles! module "make_wordle" (in "run_pipeline2.py")
+* Topic probability distribution heatmaps ("make_heatmaps")
+
+
+--
+## Activity 2: Model evaluation 
+<br/>
+* "evaluation.py" (in "run_pipeline2.py")
+    * overall model coherence (best: c_v)
+    * individual topic coherence (c_v)
+* various measures of model quality
+* many types of evaluations (beyond the code here)
+
+--
+## Topic Coherence Measures 
+<a href="img/coherence-measures.png"><img height="450" data-src="img/coherence-measures.png"></img></a>
+<br/>(Röder et al., "Exploring the Space of Topic Coherence Measures", 2015)
+
+
+--
+## Activity 3: bring your own corpus
+<br/>
+* If there is time left... 
+* Does anyone have a collection of many short English-language texts?
+* Let's share it and use it to build a topic model
+ 
+
+
+---
+# Wrapping up
+
 
 --
 ## Summary of what we have covered
+<br/>
+* A bit of background on distributional semantics
 * An idea of what a topic model consists of <!-- .element: class="fragment" data-fragment-index="1" -->
 * An intuition of how topic models are inferred <!-- .element: class="fragment" data-fragment-index="2" -->
 * Some avenues for interpreting and visualizing topic models <!-- .element: class="fragment" data-fragment-index="3" -->
 * The overall workflow required for topic modeling <!-- .element: class="fragment" data-fragment-index="4" -->
-* How to use MALLET for topic modeling <!-- .element: class="fragment" data-fragment-index="5" -->
+* How to use Python for topic modeling <!-- .element: class="fragment" data-fragment-index="5" -->
 
 --
 ## A few things not covered here
-* Preprocessing, Postprocessing, Visualization <!-- .element: class="fragment" data-fragment-index="1" -->
+<br/>
 * Implementation details of Gibbs Sampling <!-- .element: class="fragment" data-fragment-index="2" -->
 * Precursors of LDA: LSA, pLSA, NNMF, etc. <!-- .element: class="fragment" data-fragment-index="3" -->
 * Variants of LDA: hierarchical, labeled, dynamic, etc. <!-- .element: class="fragment" data-fragment-index="4" -->
 * Evaluation strategies: human evaluation, external, internal  <!-- .element: class="fragment" data-fragment-index="5" -->
 
+
 --
 ## Your questions and projects
+<br/>
 * What kind of projects / text collections do you have?
 * What kind of research questions do you have?
 * What do you think topic modeling could tell you?
 * ...
 
 
---
-## Further Reading: Theory and Tutorials
-<small>
-
-**Introductory articles**
-* Blei, David M. (2012). "Probabilistic topic models". In: _Communications of the ACM_, 55(4): 77–84. <http://www.cs.princeton.edu/~blei/papers/Blei2012.pdf>
-* Steyvers, M. and Griffiths, T. (2006). "Probabilistic Topic Models". In: Landauer, T. et al. (eds), _Latent Semantic Analysis: A Road to Meaning_. Laurence Erlbaum.
-
-**Tutorials**
-* Weingart, Scott (2012). "Topic Modeling for Humanists: A Guided Tour". In: _The Scottbot Irregular_. <http://www.scottbot.net/HIAL/?p=19113>
-* Graham, Shawn, Scott Weingart and Ian Milligan (2012). "Getting Started with Topic Modeling and MALLET". _The Programming Historian_. <http://programminghistorian.org/lessons/topic-modeling-and-mallet>
-* Riddell, Allen. (2014). "TAToM: Text Analysis with Topic Modeling for Humanities Scholars". In: _DARIAH-DE Schulungsmaterialien_. <https://de.dariah.eu/tatom/>
-
-**Video lectures**
-* Jordan Boyd-Graber, "Topic Models", YouTube.com, 2015. <https://www.youtube.com/watch?v=yK7nN3FcgUs>
-* David Blei, "Topic Models", Videolectures.net, 2012, <http://videolectures.net/mlss09uk_blei_tm/>
-
-</small>
-
---
-## Further Reading: Applications
-<small>
-
-* Blevins, Cameron (2010). "Topic Modeling Martha Ballard’s Diary". In: _Historying_. <http://historying.org/2010/04/01/topic-modeling-martha-ballards-diary/>
-* Jockers, Matt (2013). _Macroanalysis - Digital Methods and Literary History_. Champaign, IL: University of Illinois Press.
-* Rhody, Lisa (2012). "Topic Modeling and Figurative Language". In: _Journal of Digital Humanities_, 2(1). <http://journalofdigitalhumanities.org/2-1/topic-modeling-and-figurative-language-by-lisa-m-rhody/>
-* Schöch, Christof (2017, to appear). "Topic Modeling Genre: An Exploration of French Classical and Enlightenment Drama". In: _Digital Humanities Quarterly_. <https://zenodo.org/record/166356>
-* Underwood, Ted and Andrew Goldstone (2012)." "What can topic models of PMLA teach us about the history of literary scholarship?" In: _The Stone and the Shell_. <http://tedunderwood.com/2012/12/14/what-can-topic-models-of-pmla-teach-us-about-the-history-of-literary-scholarship/>
-
-</small>
 
 </section>
 
@@ -911,11 +863,9 @@ Heuser, Ryan. „Word Vectors in the Eighteenth Century“. In Digital Humanitie
 <br/>
 <br/>
 <br/>
-<br/>
-<br/>
 <hr/>
-<p>Christof Schöch, 2017</p>
-<p><a href="https://christofs.github.io/">christofs.github.io</a></p>
+<p>Christof Schöch, 2019</p>
+<p><a href="https://christofs.github.io/">christofs.github.io/riga</a></p>
 <p><a href="https://creativecommons.org/licenses/by/4.0/">CC-BY 4.0</a><br/></p>
 <hr/>
 <br/>
