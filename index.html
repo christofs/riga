@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <!-- CUSTOMIZE THIS! -->
-<title>Embedded Humanities</title>
+<title>Riga 2019</title>
 <meta name="author" content="Christof Schöch">
 <!-- END -->
 <meta name="description" content="Slides">
@@ -53,25 +53,80 @@ document.getElementsByTagName( 'head' )[0].appendChild( link );
 ---
 ## Overview
 <br/>
-1. [Distributional Semantics: Principles and Methods](#/2) 
-2. [What is Topic Modeling?](#/3) 
-3. [Interpreting Topic Models: Examples and Visualizations](#/4)
-4. [First steps doing Topic Modeling](#/5)
-5. [Advanced issues in Topic Modeling](#/6)
+1. [Introduction](#/2) 
+1. [Distributional Semantics: Principles and Methods](#/3) 
+2. [What are Word Embeddings?](#/4) 
+2. [What is Topic Modeling? Examples](#/5) 
+2. [Interpreting Topic Models: An Example](#/6)
+3. [Topic Models: the Theory](#/7)
+3. [A Topic Modeling pipeline](#/8)
+4. [First steps doing Topic Modeling](#/9)
+5. [Advanced issues in Topic Modeling](#/10)
 
 
 
 ---
 # Introduction
 
+--
+## About this workshop 
+<br/>
+* Slides available online: https://christofs.github.io/riga/#/
+
+
+--
+## About myself 
+<br/>
+* Professor of Digital Humanities
+* Not a computer scientist, not a statistician
+* French literary scholar by training
+* Interests in corpus building and quantitative text analysis
+* see: https://christof-schoech.de/en 
+ 
+
+--
+## About you: raise your hand if...
+<br/>
+* ... you are a literary scholar
+* ... you are a historian
+* ... you are a sociologist
+* ... you are a (computational / corpus) linguist
+* ... you are a computer scientist
+* ... you are a digital humanist
+* ... you are a librarian
+* ... you consider yourself to be a local
+
+
+
+---
+# Distributional Semantics: Principles and Methods
+
+--
+## Basic intuition about distributional semantics
+<br/>
+* Her friend's ... was located on the second floor of the house. 
+* "room" ?
+* "apartment" ?
+* "balcony" ?
+* "cat" ?
+
+--
+## What does this example tell us?
+<br/>
+* We can rank the likelihood of these words in the given context
+* We use world knowledge, but also linguistic competency, for this
+* Computers can learn this too, based on cooccurrence patterns
+* That's how distributional semantics works
 
 --
 ## Basic idea
 <br/>
-* Word Embedding Models are cool!  <!-- .element: class="fragment" data-fragment-index="1" -->
-* How can they be useful for in Digital Humanities? <!-- .element: class="fragment" data-fragment-index="2" -->
-* More precisely: how can they be helpful <br/>for other exciting digital methods? <!-- .element: class="fragment" data-fragment-index="3" -->
-* Here: Topic Modeling and Sentiment Analysis <!-- .element: class="fragment" data-fragment-index="4" -->
+* The meaning of words depends on their context <!-- .element: class="fragment" data-fragment-index="1" -->
+* Words frequently appearing in similar contexts have similar meanings <!-- .element: class="fragment" data-fragment-index="2" -->
+
+
+---
+# What are Word Embeddings? 
 
 --
 ## Two Models
@@ -136,8 +191,8 @@ Result: 0.714615326722
 * French novel model: 79.5% accuracy
 
 
----
-# Word Embeddings<br/>for Topic Modeling
+--
+## Word Embeddings<br/>for Topic Modeling
 
 --
 ## Topic Modeling
@@ -174,8 +229,8 @@ Correlation between WEM-based<br/> coherence and Mallet diagnostics<br/>
 <br/>
 <br/>http://mallet.cs.umass.edu/diagnostics.php
 
----
-# Word Embeddings<br/>for Sentiment Analysis
+--
+## (c) Word Embeddings<br/>for Sentiment Analysis
 
 --
 ## Challenges 
@@ -276,18 +331,8 @@ Result   -0.1407
 <br/>
 * Correlation between existing scores and <br/>the prediction for these same scores: 0.59
 
----
-# Conclusion
-<br/>
-* (Hopefully) some promising perspectives
-* A lot more to do; suggestions for improvements?
-
-
-
 --
 ## References
-<br/>Thank you! 
-<br/>
 
 <small>
 
@@ -299,29 +344,11 @@ Heuser, Ryan. „Word Vectors in the Eighteenth Century“. In Digital Humanitie
 * Turney, Peter T., und Patrick Pantel. „From Frequency to Meaning: Vector Space Models of Semantics“. Journal of Artificial Intelligence Research 37 (2010): 141–88. https://arxiv.org/abs/1003.1141.
 * Widdows, Dominic. Geometry and meaning. CSLI lecture notes, no. 172. Stanford CA: CSLI Publications, 2004.
 
-<p><br/>With special thanks to gensim, pygal and reveal.js</p>
-
-
 </small>
 
---
-<br/>
-<br/>
-## Thank you!
-<br/>
-<br/>
-<br/>
-<br/>
-<hr/>
-<p>Christof Schöch, 2017</p>
-<p><a href="https://christofs.github.io/">christofs.github.io</a></p>
-<p><a href="https://creativecommons.org/licenses/by/4.0/">CC-BY 4.0</a><br/></p>
-<hr/>
-<br/>
-<br/>
 
----
-# Bonus slides
+--
+## Bonus slides
 
 --
 ## CBOW Model
@@ -338,22 +365,7 @@ Heuser, Ryan. „Word Vectors in the Eighteenth Century“. In Digital Humanitie
 
 
 ---
-# 1. Distributional Semantics: Principles and Methods
-
---
-# (a) Principles
-
-
---
-# (a) Word Embeddings
-
-
---
-# (b) Topic Modeling
-
-
----
-# 1. What is Topic Modeling?
+# What is Topic Modeling?
 
 --
 # (a) Getting started
@@ -435,154 +447,8 @@ Heuser, Ryan. „Word Vectors in the Eighteenth Century“. In Digital Humanitie
 -->
 
 
---
-## (c) How do we arrive at a topic model?
-
---
-## Some relevant ideas
-* The most widespread implementation uses 'Latent Dirichlet Allocation'
-* Follows the "bag-of-words"-model: word order is irrelevant <!-- .element: class="fragment" data-fragment-index="1" -->
-* No semantic knowledge / dictionary / WordNet etc. is used; language-independent <!-- .element: class="fragment" data-fragment-index="2" -->
-* Based on distributional semantics: "a word is characterized by the company it keeps" (John Firth 1957) <!-- .element: class="fragment" data-fragment-index="3" -->
-* Discovers words which frequently occur together or in similar contexts (=topics)  <!-- .element: class="fragment" data-fragment-index="4" -->
-* Infers how important each word is in each topic <!-- .element: class="fragment" data-fragment-index="5" -->
-* Infers how important each topic is in each document <!-- .element: class="fragment" data-fragment-index="6" -->
-
-
---
-## Generative, inverted, iterative
-<br/>
->"A topic model is a generative model for documents: it specifies a simple probabilistic procedure by which documents can be generated. To make a new document, one chooses a distribution over topics. Then, for each word in that document, one chooses a topic at random according to this distribution, and draws a word from that topic. Standard statistical techniques can be used to invert this process, inferring the set of topics that were responsible for generating a collection of documents."
-
-<br/>
-<p>(Steyvers and Griffiths, "Probabilistic Topic Modeling", 2006)</p>
-
-
-
---
-## Inference problem: observed data
-<p><img height="500" data-src="img/blei_topic-modeling_observed.png"></img></p>
-<p>(David Blei, "Topic Models" lecture, 2009)</p>
-
---
-## Inferred, latent model
-<p><img height="500" data-src="img/tm_blei.png"></img></p>
-<p>(David Blei, "Probabilistic Topic Models", 2012)</p>
-
-
-
---
-## Bayesian Statistics
->"The computational problem of inferring the hidden topic structure from the documents is the problem of computing the posterior distribution, the conditional distribution of the hidden variables, given the documents."
-
-<br/>
-<p>(David Blei, "Probabilistic Topic Models", 2012)</p>
-
-
---
-## Inference task
-<br/>
-###p(Z, φ, θ | w, α, β)
-<br/>
-<small>
-
-* Compute the probability p of the latent variables... 
-	* Z = assignments of each word in each document to a topic
-	* φ (phi) = distribution over words (for each topic)
-	* θ (theta) = distribution over topics (for each document)
-* ...given our observed variables (input data) and parameters
-	* w = the data, i.e. the words in each document
-	* α = parameter of the Dirichlet prior for topics per document
-	* β = parameter of the Dirichlet prior for words per topic
-
-</small>
-
-
---
-## The starting point of LDA
-* We have the documents with their words (e.g. as a word/document frequency matrix)  <!-- .element: class="fragment" data-fragment-index="1" -->
-* We are looking for the word distributions per topic, the topic distributions per document, and the topic assignment of each word  <!-- .element: class="fragment" data-fragment-index="2" -->
-* Both distributions are dependent on each other (if a topic changes, the topic distributions change)  <!-- .element: class="fragment" data-fragment-index="3" -->
-* And both distributions need to fit with the original documents  <!-- .element: class="fragment" data-fragment-index="4" -->
-
-
---
-## The generative model behind LDA
-* For each topic, there is a distribution over words <!-- .element: class="fragment" data-fragment-index="1" -->
-* For each document, there is a distribution over topics <!-- .element: class="fragment" data-fragment-index="2" -->
-* For each word in each document: <!-- .element: class="fragment" data-fragment-index="3" -->
-    * We sample a topic from the topic distribution of that document
-    * We sample a word from the word distribution of that topic
-* This can only work if we have the distributions; which we don't <!-- .element: class="fragment" data-fragment-index="4" -->
-
---
-## Random initialization
-* For each document, we generate a random distribution over topics <!-- .element: class="fragment" data-fragment-index="1" -->
-* For each topic, we generate a random distribution over words <!-- .element: class="fragment" data-fragment-index="2" -->
-* For each word in each document:  <!-- .element: class="fragment" data-fragment-index="3" -->
-    * Sample a topic from the topic distribution
-    * Sample a word from the word distribution of that topic
-* Now we have a model; but we know it's most likely wrong (=low confidence) <!-- .element: class="fragment" data-fragment-index="4" -->
-
---
-## Inference: iterative approximation
-* Using the observed data and our (random/erroneous) model, we can improve the model <!-- .element: class="fragment" data-fragment-index="1" -->
-* One among several methods: Gibbs sampling <!-- .element: class="fragment" data-fragment-index="2" -->
-	* For one word in one document, remove the existing topic assignment <!-- .element: class="fragment" data-fragment-index="3" -->
-    * Based on the model and the other words in the document, assign a new topic to the word (cooccurrence!) <!-- .element: class="fragment" data-fragment-index="4" -->
-    * Update the overall model according to this assignment;  <!-- .element: class="fragment" data-fragment-index="5" -->
-* Repeat until your time runs out or your evaluation task says it's ok to stop <!-- .element: class="fragment" data-fragment-index="6" -->
-
-
---
-## How it works exactly, clearly explained
-<p><img height="600" data-src="img/sharris_more-explicit-in-step-two.jpg"></img></p>  <!-- .element: class="fragment" data-fragment-index="1" -->
-
---
-## Topic modeling: geometric interpretation
-<p><img height="500" data-src="img/steyvers_geometric-interpretation-of-the-topic-model.png"></img></p>
-<p>(Steyvers and Griffiths, "Probabilistic Topic Modeling", 2006)</p>
-
-
---
-## Latent Dirichlet Allocation: plate notation
-<p><img height="500" data-src="img/steyvers_topic-modeling-plate-notation.png"></img></p>
-<p>(<https://en.wikipedia.org/wiki/Latent_Dirichlet_allocation>)</p>
-
-
---
-## Latent Dirichlet Allocation: plate notation
-<p><img height="400" data-src="img/wikipedia_topic-modeling-plate-notation_legend.png"></img></p>
-<p>(<https://en.wikipedia.org/wiki/Latent_Dirichlet_allocation>)</p>
-
-
-
---
-## Latent Dirichlet Allocation: plate notation
-<small>
-
-* D = number of documents (given)
-* T = number of topics (set by researcher)
-* Nd = number of words in document d
-* α (alpha): Dirichlet prior (hyperparameter: sparse / smooth distribution of topics)
-* β (beta): Dirichlet prior (hyperparameter: sparse / smooth distribution of words)
-* θ (theta): distribution over topics (for each document; latent variable)
-* ϕ (phi): distribution over words (for each topic; latent variable) 
-* z = assignment of words to topics (latent variable)
-* w = words in a document (observed variable)
-
-</small>
-
-
-
-
-
 ---
-# 2. Interpreting Topic Models
-
-
---
-## (a) Example analysis: French crime fiction
+# Interpreting Topic Models: <br/>An example from French crime fiction
 
 --
 ## Text collection: 840 French Novels
@@ -711,12 +577,156 @@ Heuser, Ryan. „Word Vectors in the Eighteenth Century“. In Digital Humanitie
 
 
 
+---
+# Topic Modeling: Theory
+
 --
-# 3. Hands-on with Python
+## Some relevant ideas
+* The most widespread implementation uses 'Latent Dirichlet Allocation'
+* Follows the "bag-of-words"-model: word order is irrelevant <!-- .element: class="fragment" data-fragment-index="1" -->
+* No semantic knowledge / dictionary / WordNet etc. is used; language-independent <!-- .element: class="fragment" data-fragment-index="2" -->
+* Based on distributional semantics: "a word is characterized by the company it keeps" (John Firth 1957) <!-- .element: class="fragment" data-fragment-index="3" -->
+* Discovers words which frequently occur together or in similar contexts (=topics)  <!-- .element: class="fragment" data-fragment-index="4" -->
+* Infers how important each word is in each topic <!-- .element: class="fragment" data-fragment-index="5" -->
+* Infers how important each topic is in each document <!-- .element: class="fragment" data-fragment-index="6" -->
 
 
 --
-## (a) Fundamentals
+## Generative, inverted, iterative
+<br/>
+>"A topic model is a generative model for documents: it specifies a simple probabilistic procedure by which documents can be generated. To make a new document, one chooses a distribution over topics. Then, for each word in that document, one chooses a topic at random according to this distribution, and draws a word from that topic. Standard statistical techniques can be used to invert this process, inferring the set of topics that were responsible for generating a collection of documents."
+
+<br/>
+<p>(Steyvers and Griffiths, "Probabilistic Topic Modeling", 2006)</p>
+
+
+
+--
+## Inference problem: observed data
+<p><img height="500" data-src="img/blei_topic-modeling_observed.png"></img></p>
+<p>(David Blei, "Topic Models" lecture, 2009)</p>
+
+--
+## Inferred, latent model
+<p><img height="500" data-src="img/tm_blei.png"></img></p>
+<p>(David Blei, "Probabilistic Topic Models", 2012)</p>
+
+
+
+--
+## Bayesian Statistics
+>"The computational problem of inferring the hidden topic structure from the documents is the problem of computing the posterior distribution, the conditional distribution of the hidden variables, given the documents."
+
+<br/>
+<p>(David Blei, "Probabilistic Topic Models", 2012)</p>
+
+
+--
+## Inference task
+<br/>
+###p(Z, φ, θ | w, α, β)
+<br/>
+<small>
+
+* Compute the probability p of the latent variables... 
+	* Z = assignments of each word in each document to a topic
+	* φ (phi) = distribution over words (for each topic)
+	* θ (theta) = distribution over topics (for each document)
+* ...given our observed variables (input data) and parameters
+	* w = the data, i.e. the words in each document
+	* α = parameter of the Dirichlet prior for topics per document
+	* β = parameter of the Dirichlet prior for words per topic
+
+</small>
+
+
+--
+## The starting point of LDA
+* We have the documents with their words (e.g. as a word/document frequency matrix)  <!-- .element: class="fragment" data-fragment-index="1" -->
+* We are looking for the word distributions per topic, the topic distributions per document, and the topic assignment of each word  <!-- .element: class="fragment" data-fragment-index="2" -->
+* Both distributions are dependent on each other (if a topic changes, the topic distributions change)  <!-- .element: class="fragment" data-fragment-index="3" -->
+* And both distributions need to fit with the original documents  <!-- .element: class="fragment" data-fragment-index="4" -->
+
+
+--
+## The generative model behind LDA
+* For each topic, there is a distribution over words <!-- .element: class="fragment" data-fragment-index="1" -->
+* For each document, there is a distribution over topics <!-- .element: class="fragment" data-fragment-index="2" -->
+* For each word in each document: <!-- .element: class="fragment" data-fragment-index="3" -->
+    * We sample a topic from the topic distribution of that document
+    * We sample a word from the word distribution of that topic
+* This can only work if we have the distributions; which we don't <!-- .element: class="fragment" data-fragment-index="4" -->
+
+--
+## Random initialization
+* For each document, we generate a random distribution over topics <!-- .element: class="fragment" data-fragment-index="1" -->
+* For each topic, we generate a random distribution over words <!-- .element: class="fragment" data-fragment-index="2" -->
+* For each word in each document:  <!-- .element: class="fragment" data-fragment-index="3" -->
+    * Sample a topic from the topic distribution
+    * Sample a word from the word distribution of that topic
+* Now we have a model; but we know it's most likely wrong (=low confidence) <!-- .element: class="fragment" data-fragment-index="4" -->
+
+--
+## Inference: iterative approximation
+* Using the observed data and our (random/erroneous) model, we can improve the model <!-- .element: class="fragment" data-fragment-index="1" -->
+* One among several methods: Gibbs sampling <!-- .element: class="fragment" data-fragment-index="2" -->
+	* For one word in one document, remove the existing topic assignment <!-- .element: class="fragment" data-fragment-index="3" -->
+    * Based on the model and the other words in the document, assign a new topic to the word (cooccurrence!) <!-- .element: class="fragment" data-fragment-index="4" -->
+    * Update the overall model according to this assignment;  <!-- .element: class="fragment" data-fragment-index="5" -->
+* Repeat until your time runs out or your evaluation task says it's ok to stop <!-- .element: class="fragment" data-fragment-index="6" -->
+
+
+--
+## How it works exactly, clearly explained
+<p><img height="600" data-src="img/sharris_more-explicit-in-step-two.jpg"></img></p>  <!-- .element: class="fragment" data-fragment-index="1" -->
+
+
+
+--
+## Bonus slides
+
+--
+## Topic modeling: geometric interpretation
+<p><img height="500" data-src="img/steyvers_geometric-interpretation-of-the-topic-model.png"></img></p>
+<p>(Steyvers and Griffiths, "Probabilistic Topic Modeling", 2006)</p>
+
+
+--
+## Latent Dirichlet Allocation: plate notation
+<p><img height="500" data-src="img/steyvers_topic-modeling-plate-notation.png"></img></p>
+<p>(<https://en.wikipedia.org/wiki/Latent_Dirichlet_allocation>)</p>
+
+
+--
+## Latent Dirichlet Allocation: plate notation
+<p><img height="400" data-src="img/wikipedia_topic-modeling-plate-notation_legend.png"></img></p>
+<p>(<https://en.wikipedia.org/wiki/Latent_Dirichlet_allocation>)</p>
+
+
+
+--
+## Latent Dirichlet Allocation: plate notation
+<small>
+
+* D = number of documents (given)
+* T = number of topics (set by researcher)
+* Nd = number of words in document d
+* α (alpha): Dirichlet prior (hyperparameter: sparse / smooth distribution of topics)
+* β (beta): Dirichlet prior (hyperparameter: sparse / smooth distribution of words)
+* θ (theta): distribution over topics (for each document; latent variable)
+* ϕ (phi): distribution over words (for each topic; latent variable) 
+* z = assignment of words to topics (latent variable)
+* w = words in a document (observed variable)
+
+</small>
+
+
+
+
+
+
+---
+# A Topic Modeling pipeline
 
 
 --
@@ -726,175 +736,93 @@ Heuser, Ryan. „Word Vectors in the Eighteenth Century“. In Digital Humanitie
 
 
 --
-## Parameters
-* Preprocessing: length of the text segments, lemmatization, feature selection <!-- .element: class="fragment" data-fragment-index="1" -->
-* Modelling: number of topics, number of iterations, distribution optimization  <!-- .element: class="fragment" data-fragment-index="2" -->
-* Visualization: aggregation strategy, normalization, choice of visualization  <!-- .element: class="fragment" data-fragment-index="3" -->
+## Some parameters
+<br/>
+* Preprocessing: text segmentation, lemmatization, feature selection <!-- .element: class="fragment" data-fragment-index="1" -->
+* Modeling: number of topics, number of iterations, etc.  <!-- .element: class="fragment" data-fragment-index="2" -->
+* Evaluation: model quality measure  <!-- .element: class="fragment" data-fragment-index="2" -->
+* Postprocessing: level of metadata / text linkage  <!-- .element: class="fragment" data-fragment-index="2" -->
+* Visualization: many options  <!-- .element: class="fragment" data-fragment-index="3" -->
 
 
 --
 ## gensim: the heart of topic modeling
+<br/>
 * Preprocessing is done elsewhere (eg., with tmw)
 * Postprocessing and visualisation is done elsewhere (eg., with tmw)
 * gensim imports texts and builds the topic model (and does it really well)
 
 
---
-## (b) Getting started
+
+
+
+
+---
+## First steps doing Topic Modeling
 
 
 --
-## Some useful links
-* This section of the slides: <br/>https://christofs.github.io/topic-modeling-edinburgh/#/4/6 
-* The dataset (Hong Kong Universities' Press Releases): <br/> <https://dl.dropboxusercontent.com/u/1786135/press.zip>
-* The gensim Topic Modeling page: <br/>https://radimrehurek.com/gensim/
-
-
-
---
-## gensim: prerequisites
-
-
---
-## Testing gensim
-(using the Linux Terminal; from "/home/[USER]/")
-```
-cd ~/Programs/mallet-2.0.8/
-./bin/mallet
-```
+## Some starting points
 <br/>
-(using the Windows CMD; from "C:")
-```
-cd C:\mallet-2.0.8
-.\bin\mallet
-```
-(List of commands should show up.)
+* This section of the slides: <br/>https://christofs.github.io/riga/#/9 
+* Dataset and scripts package: <br/>https://www.dropbox.com/s/orq3nx0zmui96l9/tm-downloads.zip?dl=0
+* Also publicly available at: <br/>https://github.com/dh-trier/topicmodeling/
+
+--
+## Getting ready
+<br/>
+* Has everyone got the "OK"s when running the test script?
+* Please download and unzip the dataset linked above
+* So let's all launch Thonny 
+* Install additional libraries: seaborn, wordcloud
+
+--
+## The workshop data
+<br/>
+* datasets/
+* results/
+* scripts/
+
+--
+## The script architecture
+<br/>
+* each step in the pipeline (input-output) is one module
+* each module consists of several functions
+* a "main" function coordinates these functions
+* the "run_pipeline.py" script coordinates the modules
+
+--
+## A closer look at run_pipeline
+<br/>
+* Imports
+* Files and Folders
+* Parameters
+* Functions
+* Coordinating function
 
 
 --
-## Folder structure
-<p>(unzipped press.zip)
-* /press/
-   * 1-prepd/
-   * 1-texts/
-   * 2-mallet/
-   * 3-derived
-   * metadata.csv
-   * stopwords.txt
-
---
-## Calling Mallet: two steps
-* "import"
-    * Converts the input text files into the Mallet corpus format
-    * Writes a binary file
-* "train-topics"
-    * Performs the actual modeling on the corpus
-    * Writes several tabular files
+## Step by step: preprocessing
+<br/>
+* Open "preprocessing.py" with Thonny
+* Note the parameters
+* Note the file structure
+* Note the flow of the data
 
 
---
-## (b) The details
-
-
---
-## (1) Importing texts into Mallet
-* tell the computer to use Mallet
-* tell Mallet to import texts
-* ...where the text files are
-* ...where to save the corpus to
-* (optionally: ...how to tokenize the texts)
-* (optionally: ...whether to use stopwords)
-
---
-## Importing texts into Mallet (Linux)
-(using the Terminal; from "mallet-2.0.8" folder)
-```
-./bin/mallet import-dir 
---input ~/Desktop/press/1-texts/
---output ~/Desktop/press/2-mallet/press.mallet
---keep-sequence
---remove-stopwords TRUE
---stoplist-file ~/Desktop/press/stopwords.txt
-```
-
-
---
-## Importing texts into Mallet (Windows)
-(using the `cmd` Terminal; from "mallet-2.0.8" folder)
-```
-bin\mallet import-dir 
---input C:\Users\[USER]\Desktop\press\1-texts 
---output C:\Users\[USER]\Desktop\press\2-mallet\press.mallet 
---keep-sequence 
---remove-stopwords TRUE 
---stoplist-file C:\Users\[USER]\Desktop\press\stopwords.txt
-```
 
 
 
 --
-## (2) Build the topic model
-* tell the computer to run Mallet
-* tell Mallet to do some modeling (`train-topics`)
-* ...where the corpus file is (`--input`)
-* ...how many topics (`--num-topics`)
-* ...how many iterations (`--num-iterations`)
-* ...how many words to display (`--num-topic-words`)
-* ...path for words-by-topics (`--output-topic-keys`)
-* ...path for topics-per-doc (`--output-doc-topics`)
-
---
-## (2) Build the topic model (Linux)
-<p>(from "mallet-2.0.8/" folder)</p>
-```
-./bin/mallet train-topics  
---input ~/Desktop/press/2-mallet/press.mallet 
---num-topics 20 
---num-iterations 200 
---num-top-words 10 
---output-topic-keys ~/Desktop/press/2-mallet/topics-words.txt 
---output-doc-topics ~/Desktop/press/2-mallet/docs-topics.txt 
---doc-topics-max 20
-```
-
---
-## (2) Build the topic model (Windows)
-<p>(from "mallet-2.0.8" folder)</p>
-```
-bin\mallet train-topics 
---input C:\\Users\[USER]\Desktop\press\2-mallet\press.mallet 
---num-topics 20 
---num-iterations 200 
---num-top-words 10 
---output-topic-keys C:\\Users\[USER]\Desktop\press\2-mallet\topics-words.txt 
---output-doc-topics C:\\Users\[USER]\Desktop\press\2-mallet\docs-topics.txt 
---doc-topics-max 20
-```
-
---
-## Inspecting the results
-* Open the `topics-words.txt` file with text editor (or Calc/Excel)
-* Open the `docs-topics.txt` file with text editor (or Calc/Excel)
+## Practice
 
 
 --
-## (d) Practice
-
---
-## Preparation
-* Open "run-mallet.txt" in text editor
-* Find the Mallet installation folder on your computer and copy the path into your text file
-* Find the "press" folder on your computer and copy the path into your text file
-* Copy the generic `import` and `train-topic` commands from the presentation into your text file
-* Now you're all set!
-
---
-## Exercise 1: Import and model
-* Build the `import` and `train-topic` commands for your system;
-* remember to remove all line breaks in the command
-* Use the `import` comand and make sure the right `press.mallet` corpus appears
-* Use the `train-topics` command and make sure the output files appear
-* Inspect the results; do you get nice topics?
+## Exercise 1: run "run_pipeline1.py"
+<br/>
+* Decide on your own parameters
+* What error messages do you get, if any?
+* What kind of results do you get?
 
 
 --
