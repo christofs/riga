@@ -71,8 +71,15 @@ document.getElementsByTagName( 'head' )[0].appendChild( link );
 --
 ## About this workshop 
 <br/>
-* Slides available online: https://christofs.github.io/riga/#/
-* Download: <br/>https://www.dropbox.com/s/orq3nx0zmui96l9/tm-downloads.zip?dl=0
+* Context, examples, theory, demo, hands-on <!-- .element: class="fragment" data-fragment-index="1" -->
+* Python-based, but not a Python workshop<br/>("read and run" rather than write code) <!-- .element: class="fragment" data-fragment-index="2" -->
+* Learning goal: you can create and understand your own Topic Model <!-- .element: class="fragment" data-fragment-index="3" -->
+
+<br/>
+<br/>
+<hr>
+* Slides available online: https://christofs.github.io/riga/#/ 
+* Download: <br/>https://www.dropbox.com/s/orq3nx0zmui96l9/tm-downloads.zip?dl=0 
 
 
 --
@@ -104,7 +111,7 @@ document.getElementsByTagName( 'head' )[0].appendChild( link );
 --
 ## Basic intuition about distributional semantics
 <br/>
-* Her friend's ...... was located on the second floor of the house. 
+* "Her friend's ...... was located on the second floor of the house." 
 <br/><br/>
 * "apartment" ! <!-- .element: class="fragment" data-fragment-index="1" -->
 * "room" ! <!-- .element: class="fragment" data-fragment-index="2" -->
@@ -148,11 +155,14 @@ document.getElementsByTagName( 'head' )[0].appendChild( link );
 
 --
 ## Information Retrieval: Vector Space Model
+<img src="img/vectorspace.jpg" height="550px">
 <br/>
-* ###TODO###: illustration!
+<small>(Source: Wikipedia, By Riclas - Own work, CC BY 3.0, <br/>https://commons.wikimedia.org/w/index.php?curid=9076846)</small>
+
+
 
 --
-## Word Embeddings in vector space
+## Words in vector space
 <img src="img/figure-1_similarity2.png" height="550px">
 <br/>
 (artificial data)
@@ -162,8 +172,12 @@ document.getElementsByTagName( 'head' )[0].appendChild( link );
 ## Example: French Wikipedia Model
 <br/>
 * 1.8 million articles, 750 million words
+* transform term-document-matrix into dense matrix
+* "low-dimensional", dense representation
 * skip-gram model, 300 dimensions 
-* vecor semantics: geometric relations = semantic relations
+* vector semantics: geometric relations = semantic relations
+
+
 
 
 --
@@ -204,7 +218,7 @@ Result: 0.714615326722
 * Method: Using a "find-the-wrong word"-task <!-- .element: class="fragment" data-fragment-index="1" -->
 * Lists of similar words: <!-- .element: class="fragment" data-fragment-index="2" -->
     * vert, bleu, jaune, rouge, orange
-    * argent, billet, monnaie, portemonnaie, payement
+    * billet, monnaie, portemonnaie, payement
 * Generate lists with an error <!-- .element: class="fragment" data-fragment-index="3" -->
     * vert, bleu, monnaie, jaune, rouge  
 * Wikipedia model: 90% accuracy in finding the error <!-- .element: class="fragment" data-fragment-index="4" -->
@@ -239,9 +253,6 @@ Result   -0.1407
 <br/>
 (authentic data)
 
---
-## Relation of words in semantic dimensions
-<a href="img/roman20_words-2dim_nom_labels.svg"><img src="img/roman20_words-2dim_nom_labels.svg" height="600px"></a>
 
 
 --
@@ -274,6 +285,10 @@ Result   -0.1407
 <a href="img/tsne-plot_topn-nom-5800_some-labels.svg"><img src="img/tsne-plot_topn-nom-5800_some-labels.svg" height="600px"></a>
 
 --
+## Relation of words in semantic dimensions
+<a href="img/roman20_words-2dim_nom_labels.svg"><img src="img/roman20_words-2dim_nom_labels.svg" height="600px"></a>
+
+--
 ## Comparing models (novels vs. Wikipedia)
 <a href="img/figure-6_sens17.png"><img src="img/figure-6_sens17.png" height="600px"></a>
 
@@ -301,7 +316,7 @@ Result   -0.1407
 * Information Retrieval: Search not for individual terms, but themes / semantic fields <!-- .element: class="fragment" data-fragment-index="1" -->
 * Recommender Systems: Recommend similar journal articles etc. to users <!-- .element: class="fragment" data-fragment-index="2" -->
 * Exploration of text collections: what is an email or newspaper corpus about? <!-- .element: class="fragment" data-fragment-index="3" -->
-* Research questions from literary studies, cultural studies, history: topics across authors, genres, time periods <!-- .element: class="fragment" data-fragment-index="4" -->
+* Research questions from literary studies, cultural studies, history of ideas: topics across authors, genres, time periods <!-- .element: class="fragment" data-fragment-index="4" -->
 
 --
 ## Explorative Visualization
@@ -387,7 +402,11 @@ Result   -0.1407
 
 
 --
-## (c) Bonus slides: visualizations
+## Time for questions
+
+
+--
+## Bonus slides: visualizations
 
 --
 ## Topics and subgenres: topic 3
@@ -457,7 +476,7 @@ Result   -0.1407
 --
 ## On a practical level
 <br/>
-* A topic is a group of words with some (semantic) relation (e.g., common theme) <!-- .element: class="fragment" data-fragment-index="1" -->
+* A topic is a group of words with some (semantic) relation (e.g., common theme, motive, etc.) <!-- .element: class="fragment" data-fragment-index="1" -->
 * Each topic is made up of words of varying importance and relevance to the topic <!-- .element: class="fragment" data-fragment-index="2" -->
 * Each document is made up of several topics in various proportions <!-- .element: class="fragment" data-fragment-index="3" -->
 
@@ -539,6 +558,7 @@ Result   -0.1407
 	* β = parameter of the Dirichlet prior for words per topic
 
 </small>
+
 
 --
 ## Dirichlet distributions
@@ -728,7 +748,7 @@ Result   -0.1407
 * each module consists of several functions
 * a "main" function coordinates these functions
 * the "run_pipeline.py" script coordinates the modules
-* Note: each module reads and writes data; 
+* NB: each module reads and writes data
 
 --
 ## A closer look at "run_pipeline1.py"
@@ -767,6 +787,7 @@ Result   -0.1407
 <br/>
 * Use the small "hkpress-test" dataset
 * Decide on your own parameters
+* Run the entire pipeline (step by step or in one go)
 * What error messages do you get, if any?
 * What kind of results do you get?
 
@@ -790,7 +811,7 @@ Result   -0.1407
 ## Activity 1: More visualisations 
 <br/>
 * Wordles! module "make_wordle" (in "run_pipeline2.py")
-* Topic probability distribution heatmaps ("make_heatmaps")
+* Topic probability distribution heatmaps ("make_heatmaps");<br/>depends on "metadata.csv"
 
 
 --
@@ -804,17 +825,17 @@ Result   -0.1407
 
 --
 ## Topic Coherence Measures 
-<a href="img/coherence-measures.png"><img height="450" data-src="img/coherence-measures.png"></img></a>
-<br/>(Röder et al., "Exploring the Space of Topic Coherence Measures", 2015)
+<a href="img/coherence-measures.png"><img height="500" data-src="img/coherence-measures.png"></img></a>
+<br/><small>(Röder et al., "Exploring the Space of Topic Coherence Measures", 2015)</small>
 
 
 --
-## Activity 3: bring your own corpus
+## Activity 3 / Discussion: bring your own corpus
 <br/>
 * If there is time left... 
 * Does anyone have a collection of many short English-language texts?
-* Let's share it and use it to build a topic model
- 
+* How would you go about to run a model for it?
+* What if your text collection is neither English nor French? 
 
 
 ---
